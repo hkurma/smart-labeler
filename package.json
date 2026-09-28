@@ -1,0 +1,27 @@
+{
+  "name": "smart-labeler",
+  "version": "1.0.0",
+  "description": "GitHub Action that labels new issues and pull requests with existing repo labels, using TypeSafe Jev.",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist --license licenses.txt",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1",
+    "@typesafe-ai/sdk": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "@vercel/ncc": "^0.45.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.2"
+  }
+}

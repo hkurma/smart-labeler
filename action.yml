@@ -1,0 +1,49 @@
+name: Smart Labeler
+description: Labels new issues and pull requests with the repository's existing labels, using TypeSafe Jev.
+author: Harish Kurma
+branding:
+  icon: tag
+  color: blue
+
+inputs:
+  typesafe-api-key:
+    description: TypeSafe API key. Pass it from a repository secret such as TYPESAFE_API_KEY.
+    required: true
+  github-token:
+    description: Token used to read labels and apply them. Needs `issues: write` (and `pull-requests: write` for PRs).
+    required: false
+    default: ${{ github.token }}
+  model:
+    description: TypeSafe System One model.
+    required: false
+    default: jev-latest
+  threshold:
+    description: Minimum probability (0-1) for a label to be applied.
+    required: false
+    default: "0.7"
+  max-labels:
+    description: Maximum number of labels to apply. 0 means unlimited.
+    required: false
+    default: "3"
+  group-separator:
+    description: Separator that splits a label into group and name, e.g. `:` makes `ui:bug` part of group `ui`. At most one label per group is applied.
+    required: false
+    default: ":"
+  dry-run:
+    description: Compute labels and write the summary without applying them.
+    required: false
+    default: "false"
+  fail-on-warning:
+    description: Fail the step if any warning was logged (e.g. a group was skipped for having too many labels).
+    required: false
+    default: "false"
+
+outputs:
+  labels:
+    description: JSON array of labels that were applied (or would be, under dry-run).
+  scores:
+    description: 'JSON object: `groups` maps each group to its pick (null for none), probability and whether it was applied; `labels` maps each ungrouped label to its probability and whether it was applied.'
+
+runs:
+  using: node24
+  main: dist/index.js

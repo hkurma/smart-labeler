@@ -1,0 +1,27 @@
+# Copy to .github/workflows/smart-label.yml in the repository you want labeled.
+name: Smart Label
+
+on:
+  issues:
+    types: [opened]
+  # pull_request_target (not pull_request) so PRs from forks get the secret and a write token.
+  # Safe here: the action never checks out or runs code from the PR.
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: <owner>/smart-labeler@v1
+        with:
+          typesafe-api-key: ${{ secrets.TYPESAFE_API_KEY }}
+          # threshold: "0.7"
+          # max-labels: "3"
+          # group-separator: ":"
+          # dry-run: "false"
+          # fail-on-warning: "false"
