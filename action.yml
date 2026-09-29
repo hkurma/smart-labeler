@@ -10,7 +10,7 @@ inputs:
     description: TypeSafe API key. Pass it from a repository secret such as TYPESAFE_API_KEY.
     required: true
   github-token:
-    description: Token used to read labels and apply them. Needs `issues: write` (and `pull-requests: write` for PRs).
+    description: 'Token used to read labels and apply them. Needs `issues: write` (and `pull-requests: write` for PRs).'
     required: false
     default: ${{ github.token }}
   model:
@@ -26,7 +26,7 @@ inputs:
     required: false
     default: "3"
   group-separator:
-    description: Separator that splits a label into group and name, e.g. `:` makes `ui:bug` part of group `ui`. At most one label per group is applied.
+    description: 'Separator that splits a label into group and name, e.g. `:` makes `ui:bug` part of group `ui`. At most one label per group is applied.'
     required: false
     default: ":"
   dry-run:
